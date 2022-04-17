@@ -456,9 +456,14 @@ static int mpris_metadata(sd_bus *_bus, const char *_path,
 				*dir = '\0';
 			struct stat statbuf;
 
-			char *albumart = xstrjoin(temp, "/cover.jpg");
-
+			char *albumart = xstrjoin(temp, "/cover.png");
 			int rc = stat(albumart, &statbuf);
+			if (rc == -1) {
+				free(albumart);
+				albumart = xstrjoin(temp, "/cover.jpg");
+				rc = stat(albumart, &statbuf);
+			}
+
 			if (!rc && statbuf.st_mode & S_IWUSR) {
 				size_t len = strlen(albumart);
 				char uri[(3 * len) + 1];
