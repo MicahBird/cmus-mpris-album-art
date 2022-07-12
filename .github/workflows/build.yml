@@ -6,7 +6,7 @@ jobs:
     name: Build
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-10.15]
+        os: [ubuntu-20.04]
         cc: [gcc, clang]
         exclude:
           - os: macos-10.15
@@ -15,13 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Dependencies (Homebrew)
-        if: startswith(matrix.os, 'macos-')
-        run: |
-          brew install \
-            libao ffmpeg libcddb libcdio libcue libdiscid faad2 flac jack mad \
-            libmodplug mp4v2 musepack opusfile libsamplerate libvorbis wavpack \
-            pkg-config
       - name: Dependencies (apt)
         if: startswith(matrix.os, 'ubuntu-')
         run: |
