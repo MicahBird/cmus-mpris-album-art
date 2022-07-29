@@ -1,14 +1,64 @@
-cmus — C\* Music Player
-=======================
+cmus — C\* Music Player - Fork with Album Art in MPRIS
+
+## All credit goes to @mpostaire and @TorchedSammy for actually making the feature, this is just a tutorial to install it.
 
 https://cmus.github.io/
-
-[![Build Status](https://travis-ci.org/cmus/cmus.svg?branch=master)](https://travis-ci.org/cmus/cmus)
 
 Copyright © 2004-2008 Timo Hirvonen <tihirvon@gmail.com>
 
 Copyright © 2008-2017 Various Authors
 
+
+Installing 
+----------
+
+## Make sure to **uninstall** any installed versions of cmus to avoid issues!
+
+### Ubuntu Dependencies
+
+Clone the repo and install the following dependencies:
+```
+sudo apt update
+sudo apt-get install -y \
+            ffmpeg libao-dev libasound2-dev libavcodec-dev \
+            libavformat-dev libswresample-dev libcddb2-dev libcdio-cdda-dev \
+            libcue-dev libdiscid-dev libfaad-dev libflac-dev libjack-dev \
+            libmad0-dev libmodplug-dev libmpcdec-dev libncursesw5-dev \
+            libopusfile-dev libpulse-dev libroar-dev libsamplerate0-dev \
+            libsndio-dev libvorbis-dev libwavpack-dev libsystemd-dev pkg-config
+```
+
+### Fedora Dependencies
+
+NOTE: This is not all the dependencies, just for building with pulse, mp3, and opus support.
+
+```
+sudo dnf -y install ffmpeg libmad-devel ncurses-devel pulseaudio-libs-devel opusfile-devel libsamplerate-devel systemd-devel
+
+```
+### Building And Installing
+
+Clone the repo or download the ZIP and run the `configure` script
+
+`./configure`
+
+Then to build run:
+```
+make -j `nproc`
+```
+Finally to install run:
+
+`sudo make install`
+
+
+# Uninstall
+
+To uninstall run:
+```
+sudo make uninstall
+```
+
+_Old cmus README:_
 
 Configuration
 -------------
@@ -41,30 +91,6 @@ script:
     $ ./configure CONFIG_VORBIS=y CONFIG_TREMOR=y
 
 The Tremor library is supposed to be used on hardware that has no FPU.
-
-
-Building
---------
-
-    $ make
-
-Or on some BSD systems you need to explicitly use GNU make:
-
-    $ gmake
-
-
-Installation
-------------
-
-    $ make install
-
-Or to install to a temporary directory:
-
-    $ make install DESTDIR=~/tmp/cmus
-
-This is useful when creating binary packages.
-
-Remember to replace `make` with `gmake` if needed.
 
 
 Manuals
